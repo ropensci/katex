@@ -4,7 +4,7 @@
 #'
 #' The conversion is done in R, hence the resulting HTML can be inserted into an
 #' HTML document without the need for a JavaScript library. Only the katex CSS
-#' file is needed in the final document.
+#' file is needed to display the final document.
 #'
 #' Below is an example of `render_math_rd()` used in this manual page:
 #'
