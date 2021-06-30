@@ -1,0 +1,14 @@
+Package: katex
+Type: Package
+Title: Math Typesetting in R
+Version: 0.1.0
+Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
+    comment = c(ORCID = "0000-0002-4035-0289"))
+Description: Converts LaTeX math expressions to HTML, for example for use in markdown 
+    documents or manual pages. The rendering is done in R using the V8 engine, which 
+    eliminates the need for embedding the full MathJax library in the web pages.
+License: MIT + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.1.1
+Imports: V8
+Roxygen: list(markdown = TRUE)

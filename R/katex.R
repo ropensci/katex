@@ -1,0 +1,66 @@
+#' Render LaTex Math to HTML or MathML
+#'
+#' Converts LaTeX Math to HTML to embed in manual pages or markdown documents.
+#'
+#' The conversion is done in R, hence the resulting HTML can be inserted into an
+#' HTML document without the need for a JavaScript library. Only the katex CSS
+#' file is needed in the final document.
+#'
+#' Below is an example of `render_math_rd()` used in this manual page:
+#'
+#' \Sexpr[results=rd, stage=build]{
+#'   katex::render_math_rd(
+#'     r"(f(x)= {\frac{1}{\sigma\sqrt{2\pi}}}e^{- {\frac {1}{2}} (\frac {x-\mu}{\sigma})^2})"
+#'   )
+#' }
+#'
+#' @export
+#' @rdname render_math
+#' @param tex string with latex math expression
+#' @param preview open an HTML preview page showing the snipped in the browser
+#' @param options additional arguments for [katex.render](https://katex.org/docs/options.html)
+#' @examples math <- r"(f(x)= {\frac{1}{\sigma\sqrt{2\pi}}}e^{- {\frac {1}{2}} (\frac {x-\mu}{\sigma})^2})"
+#' render_math_html(math, preview = interactive())
+render_math_html <- function(tex, preview = FALSE, include_css = FALSE, options = list(output = 'html')) {
+  html <- ctx$call('katex.renderToString', tex, options)
+  Encoding(html) = 'UTF-8'
+  if(isTRUE(preview)){
+    tmp <- tempfile(fileext = '.html')
+    writeLines(htmlify(html), tmp)
+    viewer <- getOption('viewer', utils::browseURL)
+    viewer(tmp)
+  }
+  if(isTRUE(include_css))
+    html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">', html, sep = '\n')
+  html
+}
+
+#' @export
+#' @rdname render_math
+#' @param include_css adds the katex css file to the output.
+#' This is only required once per page.
+render_math_rd <- function(tex, include_css = TRUE, options = NULL){
+  html <- render_math_html(tex, include_css = include_css, options = options)
+  paste('\\if{html}{\\out{', html, '}}', sep = '\n')
+}
+
+#' @importFrom V8 v8
+.onLoad <- function(lib, pkg){
+  assign("ctx", V8::v8("window"), environment(.onLoad))
+  ctx$source(system.file("js/katex.min.js", package = pkg))
+}
+
+htmlify <- function(snippet){
+  sub('{{math}}', snippet, template, fixed = TRUE)
+}
+
+template <- '<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+  </head>
+  <body>
+  {{math}}
+  </body>
+</html>'
