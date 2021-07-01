@@ -1,6 +1,4 @@
-# katex
-
-![badge](https://ropensci.r-universe.dev/badges/katex)
+# katex [![badge](https://ropensci.r-universe.dev/badges/katex)](https://ropensci.r-universe.dev)
 
 > Server-side Math to HTML Rendering in R
 
