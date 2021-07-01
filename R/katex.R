@@ -24,8 +24,14 @@
 #' @param preview open an HTML preview page showing the snipped in the browser
 #' @param options a list with additional rendering options `katex.render()`, see:
 #' [katex.render](https://katex.org/docs/options.html)
-#' @examples html <- render_html(example_math(), preview = interactive())
+#' @examples # Basic examples
+#' html <- render_html(example_math(), preview = interactive())
 #' mathml <- render_mathml(example_math())
+#'
+#' # Example from katex.org homepage:
+#' macros <- list("\\f" = "#1f(#2)")
+#' html <- render_html("\\f\\relax{x} = \\int_{-\\infty}^\\infty \\f\\hat\\xi\\,e^{2 \\pi i \\xi x} \\,d\\xi",
+#'   options = list(macros = macros), preview = interactive())
 render_html <- function(tex, preview = FALSE, include_css = FALSE, options = NULL) {
   html <- katex_render(tex, options)
   if(isTRUE(preview)){
@@ -45,8 +51,6 @@ render_html <- function(tex, preview = FALSE, include_css = FALSE, options = NUL
 #' This is only required once per html webpage.
 render_rd <- function(tex, include_css = TRUE, options = NULL){
   options <- as.list(options)
-  if(!length(options$displayMode))
-    options$displayMode <- TRUE
   html <- render_html(tex, include_css = include_css, options = options)
   paste('\\if{html}{\\out{', html, '}}', sep = '\n')
 }
@@ -73,6 +77,9 @@ example_math <- function(){
 
 # todo: add html class to make this a 'widget' ?
 katex_render <- function(tex, options = NULL) {
+  options <- as.list(options)
+  if(!length(options$displayMode))
+    options$displayMode <- TRUE
   html <- ctx$call('katex.renderToString', tex, options)
   Encoding(html) = 'UTF-8'
   html

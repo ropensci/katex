@@ -48,6 +48,12 @@ parameter in the \code{options} list. For this and other options, see the
 \href{https://katex.org/docs/options.html}{katex documentation}.
 }
 \examples{
+# Basic examples
 html <- render_html(example_math(), preview = interactive())
 mathml <- render_mathml(example_math())
+
+# Example from katex.org homepage:
+macros <- list("\\\\f" = "#1f(#2)")
+html <- render_html("\\\\f\\\\relax{x} = \\\\int_{-\\\\infty}^\\\\infty \\\\f\\\\hat\\\\xi\\\\,e^{2 \\\\pi i \\\\xi x} \\\\,d\\\\xi",
+  options = list(macros = macros), preview = interactive())
 }
