@@ -18,4 +18,4 @@ options(repos = c(
 install.packages('katex')
 ```
 
-Docs: https://docs.ropensci.org/katex/reference/render_math.html
+Docs: https://docs.ropensci.org/katex/reference/katex.html
