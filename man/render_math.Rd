@@ -3,16 +3,14 @@
 \name{render_math_html}
 \alias{render_math_html}
 \alias{render_math_rd}
+\alias{example_math}
 \title{Render LaTex Math to HTML or MathML}
 \usage{
-render_math_html(
-  tex,
-  preview = FALSE,
-  include_css = FALSE,
-  options = list(output = "html")
-)
+render_math_html(tex, preview = FALSE, include_css = FALSE, options = NULL)
 
 render_math_rd(tex, include_css = TRUE, options = NULL)
+
+example_math()
 }
 \arguments{
 \item{tex}{string with latex math expression}
@@ -22,7 +20,7 @@ render_math_rd(tex, include_css = TRUE, options = NULL)
 \item{include_css}{adds the katex css file to the output.
 This is only required once per page.}
 
-\item{options}{additional arguments for \href{https://katex.org/docs/options.html}{katex.render}}
+\item{options}{additional rendering options \code{katex.render()}, see: \href{https://katex.org/docs/options.html}{katex.render}}
 }
 \description{
 Converts LaTeX Math to HTML to embed in manual pages or markdown documents.
@@ -35,12 +33,9 @@ file is needed to display the final document.
 Below is an example of \code{render_math_rd()} used in this manual page:
 
 \Sexpr[results=rd, stage=build]{
-katex::render_math_rd(
-r"(f(x)= {\frac{1}{\sigma\sqrt{2\pi}}}e^{- {\frac {1}{2}} (\frac {x-\mu}{\sigma})^2})"
-)
+katex::render_math_rd(katex::example_math())
 }
 }
 \examples{
-math <- r"(f(x)= {\frac{1}{\sigma\sqrt{2\pi}}}e^{- {\frac {1}{2}} (\frac {x-\mu}{\sigma})^2})"
-render_math_html(math, preview = interactive())
+render_math_html(example_math(), preview = interactive())
 }

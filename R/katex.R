@@ -9,19 +9,16 @@
 #' Below is an example of `render_math_rd()` used in this manual page:
 #'
 #' \Sexpr[results=rd, stage=build]{
-#'   katex::render_math_rd(
-#'     r"(f(x)= {\frac{1}{\sigma\sqrt{2\pi}}}e^{- {\frac {1}{2}} (\frac {x-\mu}{\sigma})^2})"
-#'   )
+#'   katex::render_math_rd(katex::example_math())
 #' }
 #'
 #' @export
 #' @rdname render_math
 #' @param tex string with latex math expression
 #' @param preview open an HTML preview page showing the snipped in the browser
-#' @param options additional arguments for [katex.render](https://katex.org/docs/options.html)
-#' @examples math <- r"(f(x)= {\frac{1}{\sigma\sqrt{2\pi}}}e^{- {\frac {1}{2}} (\frac {x-\mu}{\sigma})^2})"
-#' render_math_html(math, preview = interactive())
-render_math_html <- function(tex, preview = FALSE, include_css = FALSE, options = list(output = 'html')) {
+#' @param options additional rendering options `katex.render()`, see: [katex.render](https://katex.org/docs/options.html)
+#' @examples render_math_html(example_math(), preview = interactive())
+render_math_html <- function(tex, preview = FALSE, include_css = FALSE, options = NULL) {
   html <- ctx$call('katex.renderToString', tex, options)
   Encoding(html) = 'UTF-8'
   if(isTRUE(preview)){
@@ -42,6 +39,12 @@ render_math_html <- function(tex, preview = FALSE, include_css = FALSE, options 
 render_math_rd <- function(tex, include_css = TRUE, options = NULL){
   html <- render_math_html(tex, include_css = include_css, options = options)
   paste('\\if{html}{\\out{', html, '}}', sep = '\n')
+}
+
+#' @export
+#' @rdname render_math
+example_math <- function(){
+  return("f(x)= {\\frac{1}{\\sigma\\sqrt{2\\pi}}}e^{- {\\frac {1}{2}} (\\frac {x-\\mu}{\\sigma})^2}")
 }
 
 #' @importFrom V8 v8
