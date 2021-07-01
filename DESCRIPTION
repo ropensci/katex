@@ -8,7 +8,7 @@ Description: Convert latex math expressions to HTML for use in markdown document
     package manual pages. The rendering is done in R using the V8 engine, which 
     eliminates the need for embedding the MathJax library in the web pages.
 License: MIT + file LICENSE
-URL: https://docs.ropensci.org/katex,
+URL: https://docs.ropensci.org/katex/,
     https://github.com/ropensci/katex
     https://katex.org/docs/options.html (upstream)
 BugReports: https://github.com/ropensci/katex/issues
