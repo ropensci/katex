@@ -53,6 +53,9 @@ render_mathml <- function(tex, options = NULL) {
 #' @param include_css adds the katex css file to the output.
 #' This is only required once per html webpage.
 render_rd <- function(tex, include_css = TRUE, options = NULL){
+  options <- as.list(options)
+  if(!length(options$displayMode))
+    options$displayMode <- TRUE
   html <- render_html(tex, include_css = include_css, options = options)
   paste('\\if{html}{\\out{', html, '}}', sep = '\n')
 }

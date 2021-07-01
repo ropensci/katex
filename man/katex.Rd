@@ -22,7 +22,7 @@ example_math()
 \item{preview}{open an HTML preview page showing the snipped in the browser}
 
 \item{include_css}{adds the katex css file to the output.
-This is only required once per page.}
+This is only required once per html webpage.}
 
 \item{options}{a list with additional rendering options \code{katex.render()}, see:
 \href{https://katex.org/docs/options.html}{katex.render}}
