@@ -1,7 +1,7 @@
 Package: katex
 Type: Package
 Title: Server-Side Math to HTML Rendering in R
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Convert latex math expressions to HTML for use in markdown documents or 
