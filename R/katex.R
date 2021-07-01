@@ -16,7 +16,8 @@
 #' @rdname render_math
 #' @param tex string with latex math expression
 #' @param preview open an HTML preview page showing the snipped in the browser
-#' @param options additional rendering options `katex.render()`, see: [katex.render](https://katex.org/docs/options.html)
+#' @param options a list with additional rendering options `katex.render()`, see:
+#' [katex.render](https://katex.org/docs/options.html)
 #' @examples render_math_html(example_math(), preview = interactive())
 render_math_html <- function(tex, preview = FALSE, include_css = FALSE, options = NULL) {
   html <- ctx$call('katex.renderToString', tex, options)

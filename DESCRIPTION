@@ -1,13 +1,17 @@
 Package: katex
 Type: Package
-Title: Math Typesetting in R
+Title: Server-side Math to HTML Rendering in R
 Version: 0.1.0
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
-Description: Converts LaTeX math expressions to HTML, for example for use in markdown 
-    documents or manual pages. The rendering is done in R using the V8 engine, which 
-    eliminates the need for embedding the full MathJax library in the web pages.
+Description: Convert latex math expressions to HTML for use in markdown documents or 
+    package manual pages. The rendering is done in R using the V8 engine, which 
+    eliminates the need for embedding the MathJax library in the web pages.
 License: MIT + file LICENSE
+URL: https://docs.ropensci.org/katex,
+    https://github.com/ropensci/katex
+    https://katex.org/docs/options.html (upstream)
+BugReports: https://github.com/ropensci/katex/issues
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Imports: V8
