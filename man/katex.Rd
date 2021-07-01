@@ -3,16 +3,16 @@
 \name{katex}
 \alias{katex}
 \alias{render_html}
-\alias{render_mathml}
 \alias{render_rd}
+\alias{render_mathml}
 \alias{example_math}
 \title{Render LaTex Math to HTML or MathML}
 \usage{
 render_html(tex, preview = FALSE, include_css = FALSE, options = NULL)
 
-render_mathml(tex, options = NULL)
-
 render_rd(tex, include_css = TRUE, options = NULL)
+
+render_mathml(tex, options = NULL)
 
 example_math()
 }
@@ -36,7 +36,7 @@ HTML document without the need for a JavaScript library. Only the
 \href{https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css}{katex css} is
 required to display the the html in the output document.
 
-Below is an example of \code{render_math_rd()} used in this manual page:
+Below is an example of \code{render_rd()} as used in this manual page:
 
 \Sexpr[results=rd, stage=build]{
 katex::render_rd(katex::example_math())

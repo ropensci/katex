@@ -7,7 +7,7 @@
 #' [katex css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css) is
 #' required to display the the html in the output document.
 #'
-#' Below is an example of `render_math_rd()` used in this manual page:
+#' Below is an example of `render_rd()` as used in this manual page:
 #'
 #' \Sexpr[results=rd, stage=build]{
 #'   katex::render_rd(katex::example_math())
@@ -17,7 +17,6 @@
 #' MathML for accessibility. To only get one or the other, set the `output`
 #' parameter in the `options` list. For this and other options, see the
 #' [katex documentation](https://katex.org/docs/options.html).
-#'
 #' @export
 #' @name katex
 #' @rdname katex
@@ -42,14 +41,6 @@ render_html <- function(tex, preview = FALSE, include_css = FALSE, options = NUL
 
 #' @export
 #' @rdname katex
-render_mathml <- function(tex, options = NULL) {
-  options <- as.list(options)
-  options$output <- 'mathml'
-  katex_render(tex = tex, options = options)
-}
-
-#' @export
-#' @rdname katex
 #' @param include_css adds the katex css file to the output.
 #' This is only required once per html webpage.
 render_rd <- function(tex, include_css = TRUE, options = NULL){
@@ -58,6 +49,14 @@ render_rd <- function(tex, include_css = TRUE, options = NULL){
     options$displayMode <- TRUE
   html <- render_html(tex, include_css = include_css, options = options)
   paste('\\if{html}{\\out{', html, '}}', sep = '\n')
+}
+
+#' @export
+#' @rdname katex
+render_mathml <- function(tex, options = NULL) {
+  options <- as.list(options)
+  options$output <- 'mathml'
+  katex_render(tex = tex, options = options)
 }
 
 #' @export
