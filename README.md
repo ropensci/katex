@@ -8,7 +8,7 @@ eliminates the need for embedding the MathJax library in the web pages.
 
 ## Installation and documentation
 
-Install from the rOpenSci [universe](https://ropensci.r-universe.dev/):
+Install directly from [r-universe](https://ropensci.r-universe.dev/):
 
 ```r
 # Install from our universe
