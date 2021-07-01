@@ -24,7 +24,7 @@ render_math_html <- function(tex, preview = FALSE, include_css = FALSE, options 
   Encoding(html) = 'UTF-8'
   if(isTRUE(preview)){
     tmp <- tempfile(fileext = '.html')
-    writeLines(htmlify(html), tmp)
+    writeLines(htmlify(html), tmp, useBytes = TRUE)
     viewer <- getOption('viewer', utils::browseURL)
     viewer(tmp)
   }
