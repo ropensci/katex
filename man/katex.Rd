@@ -16,7 +16,7 @@ katex_html(
   preview = interactive()
 )
 
-katex_rd(tex, include_css = TRUE, displayMode = TRUE, ...)
+katex_rd(tex, include_css = TRUE, displayMode = TRUE, ..., preview = FALSE)
 
 katex_mathml(tex, displayMode = TRUE, ...)
 
@@ -28,9 +28,10 @@ example_math()
 \item{include_css}{adds the katex css file to the output.
 This is only required once per html webpage.}
 
-\item{displayMode}{render math in a large, 2D, centered style similar to \verb{$$} in Latex.
-Set to \code{FALSE} to render inline style, which disables centering and tries to
-squeeze the equation on a single line.}
+\item{displayMode}{render math in a large, 2D, centered style similar to \verb{$$} in tex.
+Set to \code{FALSE} to render inline, which disables centering and tries to squeeze the
+equation on a single line. For pdf output, this corresponds to \verb{\deqn{}} and \verb{\eqn{}}
+respectively, see \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics}{WRE 2.6: Mathematics}}
 
 \item{...}{additional rendering options passed to
 \href{https://katex.org/docs/options.html}{katex.render}}
@@ -40,19 +41,20 @@ squeeze the equation on a single line.}
 \description{
 Converts latex math to html, mathml, or rd for use in manual pages or
 markdown documents.
-The conversion is done in R using V8, hence the resulting HTML can be inserted into an
-HTML document without the need for a JavaScript library. Only the
+The conversion is to HTML done in R using V8, hence the resulting snipped can
+be inserted into an HTML document without the need for a JavaScript library. Only the
 \href{https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css}{katex.css}
 style is required to display the html in the output document.
 }
 \details{
 You can use \code{katex_rd()} inside \verb{\\Sexpr} to embed html math in a package manual
-pages. For example the code below:\preformatted{\\Sexpr[results=rd, stage=build]\{
+pages. For the pdf manuals this function simply injects the input math untouched
+into the latex page. For example the code below:\preformatted{\\Sexpr[results=rd, stage=build]\{
   katex::katex_rd(katex::example_math())
 \}
 }
 
-Results in the following output (visible in HTML documentation only):
+Results in the following output:
 
 \Sexpr[results=rd, stage=build]{
 katex::katex_rd(katex::example_math())

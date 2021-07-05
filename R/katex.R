@@ -2,13 +2,14 @@
 #'
 #' Converts latex math to html, mathml, or rd for use in manual pages or
 #' markdown documents.
-#' The conversion is done in R using V8, hence the resulting HTML can be inserted into an
-#' HTML document without the need for a JavaScript library. Only the
+#' The conversion is to HTML done in R using V8, hence the resulting snipped can
+#' be inserted into an HTML document without the need for a JavaScript library. Only the
 #' [katex.css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css)
 #' style is required to display the html in the output document.
 #'
 #' You can use `katex_rd()` inside `\Sexpr` to embed html math in a package manual
-#' pages. For example the code below:
+#' pages. For the pdf manuals this function simply injects the input math untouched
+#' into the latex page. For example the code below:
 #'
 #' ```
 #' \Sexpr[results=rd, stage=build]{
@@ -16,7 +17,7 @@
 #' }
 #' ```
 #'
-#' Results in the following output (visible in HTML documentation only):
+#' Results in the following output:
 #'
 #' \Sexpr[results=rd, stage=build]{
 #'   katex::katex_rd(katex::example_math())
@@ -30,9 +31,10 @@
 #' @rdname katex
 #' @param tex string with latex math expression
 #' @param preview open an HTML preview page showing the snipped in the browser
-#' @param displayMode render math in a large, 2D, centered style similar to `$$` in Latex.
-#' Set to `FALSE` to render inline style, which disables centering and tries to
-#' squeeze the equation on a single line.
+#' @param displayMode render math in a large, 2D, centered style similar to `$$` in tex.
+#' Set to `FALSE` to render inline, which disables centering and tries to squeeze the
+#' equation on a single line. For pdf output, this corresponds to `\deqn{}` and `\eqn{}`
+#' respectively, see [WRE 2.6: Mathematics](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics)
 #' @param ... additional rendering options passed to
 #' [katex.render](https://katex.org/docs/options.html)
 #' @examples # Basic examples
@@ -61,9 +63,12 @@ katex_html <- function(tex, include_css = FALSE, displayMode = TRUE, ..., previe
 #' @rdname katex
 #' @param include_css adds the katex css file to the output.
 #' This is only required once per html webpage.
-katex_rd <- function(tex, include_css = TRUE, displayMode = TRUE, ...){
-  html <- katex_html(tex, include_css = include_css, displayMode = displayMode, ...)
-  paste('\\if{html}{\\out{', html, '}}', sep = '\n')
+katex_rd <- function(tex, include_css = TRUE, displayMode = TRUE, ..., preview = FALSE){
+  html <- katex_html(tex, include_css = include_css, displayMode = displayMode, ...,
+                     preview = preview)
+  html_out <- paste('\\if{html}{\\out{', html, '}}', sep = '\n')
+  latex_out <- paste('\\if{latex}{', ifelse(displayMode, '\\deqn{', '\\eqn{'), tex, '}}', sep = '\n')
+  paste(html_out, latex_out, sep = '\n')
 }
 
 #' @export
