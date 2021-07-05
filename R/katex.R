@@ -2,7 +2,7 @@
 #'
 #' Converts tex-style math expressions to html and mathml for use in manual pages or
 #' markdown documents.
-#' The conversion is done in R using V8, hence the resulting fragment can
+#' The conversion is done in R using V8 ("server-side"), hence the resulting fragment can
 #' be inserted into an HTML document without the need for a JavaScript library like MathJax.
 #' Only the [katex.css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css)
 #' style file is required in the final html document.

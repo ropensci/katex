@@ -1,13 +1,13 @@
 Package: katex
 Type: Package
 Title: Rendering Math to HTML and MathML in R
-Version: 0.2.0
+Version: 1.0.0
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
     comment = c(ORCID = "0000-0002-4035-0289"))
-Description: Convert latex math expressions to HTML for use in markdown 
-    documents or package manual pages. The rendering is done in R using 
-    the V8 engine, which eliminates the need for embedding the 'MathJax' 
-    library in the web pages.
+Description: Convert latex math expressions to HTML for use in markdown documents
+    or package manual pages. The rendering is done in R using the V8 engine (i.e.
+    server-side), which eliminates the need for embedding the 'MathJax' library 
+    in the output web pages.
 License: MIT + file LICENSE
 URL: https://docs.ropensci.org/katex/,
     https://github.com/ropensci/katex

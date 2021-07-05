@@ -38,7 +38,7 @@
 #'
 #' @export
 #' @name math_to_rd
-#' @rdname mathtord
+#' @rdname math_to_rd
 #' @family katex
 #' @inheritParams katex
 #' @param ascii alternate text-only representation of the input math to show in
