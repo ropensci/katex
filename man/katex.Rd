@@ -2,58 +2,74 @@
 % Please edit documentation in R/katex.R
 \name{katex}
 \alias{katex}
-\alias{render_html}
-\alias{render_rd}
-\alias{render_mathml}
+\alias{katex_html}
+\alias{katex_rd}
+\alias{katex_mathml}
 \alias{example_math}
-\title{Render LaTex Math to HTML or MathML}
+\title{Server-side LaTeX Math Rendering}
 \usage{
-render_html(tex, preview = FALSE, include_css = FALSE, options = NULL)
+katex_html(
+  tex,
+  include_css = FALSE,
+  displayMode = TRUE,
+  ...,
+  preview = interactive()
+)
 
-render_rd(tex, include_css = TRUE, options = NULL)
+katex_rd(tex, include_css = TRUE, displayMode = TRUE, ...)
 
-render_mathml(tex, options = NULL)
+katex_mathml(tex, displayMode = TRUE, ...)
 
 example_math()
 }
 \arguments{
 \item{tex}{string with latex math expression}
 
-\item{preview}{open an HTML preview page showing the snipped in the browser}
-
 \item{include_css}{adds the katex css file to the output.
 This is only required once per html webpage.}
 
-\item{options}{a list with additional rendering options \code{katex.render()}, see:
+\item{displayMode}{render math in a large, 2D, centered style similar to \verb{$$} in Latex.
+Set to \code{FALSE} to render inline style, which disables centering and tries to
+squeeze the equation on a single line.}
+
+\item{...}{additional rendering options passed to
 \href{https://katex.org/docs/options.html}{katex.render}}
+
+\item{preview}{open an HTML preview page showing the snipped in the browser}
 }
 \description{
-Converts LaTeX Math to HTML to embed in manual pages or markdown documents.
+Converts latex math to html, mathml, or rd for use in manual pages or
+markdown documents.
+The conversion is done in R using V8, hence the resulting HTML can be inserted into an
+HTML document without the need for a JavaScript library. Only the
+\href{https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css}{katex.css}
+style is required to display the html in the output document.
 }
 \details{
-The conversion is done in R, hence the resulting HTML can be inserted into an
-HTML document without the need for a JavaScript library. Only the
-\href{https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css}{katex css} is
-required to display the the html in the output document.
-
-Below is an example of \code{render_rd()} as used in this manual page:
-
-\Sexpr[results=rd, stage=build]{
-katex::render_rd(katex::example_math())
+You can use \code{katex_rd()} inside \verb{\\Sexpr} to embed html math in a package manual
+pages. For example the code below:\preformatted{\\Sexpr[results=rd, stage=build]\{
+  katex::katex_rd(katex::example_math())
+\}
 }
 
-By default, \link{render_html} returns a mix of HTML for visual rendering and includes
-MathML for accessibility. To only get one or the other, set the \code{output}
-parameter in the \code{options} list. For this and other options, see the
-\href{https://katex.org/docs/options.html}{katex documentation}.
+Results in the following output (visible in HTML documentation only):
+
+\Sexpr[results=rd, stage=build]{
+katex::katex_rd(katex::example_math())
+}
+
+By default, \link{katex_html} returns a mix of HTML for visual rendering and includes
+MathML for accessibility. To only get html, pass \code{output="html"} in the extra options,
+see also the \href{https://katex.org/docs/options.html}{katex documentation}.
 }
 \examples{
 # Basic examples
-html <- render_html(example_math(), preview = interactive())
-mathml <- render_mathml(example_math())
+html <- katex_html(example_math())
+mathml <- katex_mathml(example_math())
 
 # Example from katex.org homepage:
 macros <- list("\\\\f" = "#1f(#2)")
-html <- render_html("\\\\f\\\\relax{x} = \\\\int_{-\\\\infty}^\\\\infty \\\\f\\\\hat\\\\xi\\\\,e^{2 \\\\pi i \\\\xi x} \\\\,d\\\\xi",
-  options = list(macros = macros), preview = interactive())
+math <- "\\\\f\\\\relax{x} = \\\\int_{-\\\\infty}^\\\\infty \\\\f\\\\hat\\\\xi\\\\,e^{2 \\\\pi i \\\\xi x} \\\\,d\\\\xi"
+html <- katex_html(math,  macros = macros)
+mathml <- katex_mathml(math,  macros = macros)
 }

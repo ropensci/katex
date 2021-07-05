@@ -1,39 +1,51 @@
-#' Render LaTex Math to HTML or MathML
+#' Server-side LaTeX Math Rendering
 #'
-#' Converts LaTeX Math to HTML to embed in manual pages or markdown documents.
-#'
-#' The conversion is done in R, hence the resulting HTML can be inserted into an
+#' Converts latex math to html, mathml, or rd for use in manual pages or
+#' markdown documents.
+#' The conversion is done in R using V8, hence the resulting HTML can be inserted into an
 #' HTML document without the need for a JavaScript library. Only the
-#' [katex css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css) is
-#' required to display the the html in the output document.
+#' [katex.css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css)
+#' style is required to display the html in the output document.
 #'
-#' Below is an example of `render_rd()` as used in this manual page:
+#' You can use `katex_rd()` inside `\Sexpr` to embed html math in a package manual
+#' pages. For example the code below:
+#'
+#' ```
+#' \Sexpr[results=rd, stage=build]{
+#'   katex::katex_rd(katex::example_math())
+#' }
+#' ```
+#'
+#' Results in the following output (visible in HTML documentation only):
 #'
 #' \Sexpr[results=rd, stage=build]{
-#'   katex::render_rd(katex::example_math())
+#'   katex::katex_rd(katex::example_math())
 #' }
 #'
-#' By default, [render_html] returns a mix of HTML for visual rendering and includes
-#' MathML for accessibility. To only get one or the other, set the `output`
-#' parameter in the `options` list. For this and other options, see the
-#' [katex documentation](https://katex.org/docs/options.html).
+#' By default, [katex_html] returns a mix of HTML for visual rendering and includes
+#' MathML for accessibility. To only get html, pass `output="html"` in the extra options,
+#' see also the [katex documentation](https://katex.org/docs/options.html).
 #' @export
 #' @name katex
 #' @rdname katex
 #' @param tex string with latex math expression
 #' @param preview open an HTML preview page showing the snipped in the browser
-#' @param options a list with additional rendering options `katex.render()`, see:
+#' @param displayMode render math in a large, 2D, centered style similar to `$$` in Latex.
+#' Set to `FALSE` to render inline style, which disables centering and tries to
+#' squeeze the equation on a single line.
+#' @param ... additional rendering options passed to
 #' [katex.render](https://katex.org/docs/options.html)
 #' @examples # Basic examples
-#' html <- render_html(example_math(), preview = interactive())
-#' mathml <- render_mathml(example_math())
+#' html <- katex_html(example_math())
+#' mathml <- katex_mathml(example_math())
 #'
 #' # Example from katex.org homepage:
 #' macros <- list("\\f" = "#1f(#2)")
-#' html <- render_html("\\f\\relax{x} = \\int_{-\\infty}^\\infty \\f\\hat\\xi\\,e^{2 \\pi i \\xi x} \\,d\\xi",
-#'   options = list(macros = macros), preview = interactive())
-render_html <- function(tex, preview = FALSE, include_css = FALSE, options = NULL) {
-  html <- katex_render(tex, options)
+#' math <- "\\f\\relax{x} = \\int_{-\\infty}^\\infty \\f\\hat\\xi\\,e^{2 \\pi i \\xi x} \\,d\\xi"
+#' html <- katex_html(math,  macros = macros)
+#' mathml <- katex_mathml(math,  macros = macros)
+katex_html <- function(tex, include_css = FALSE, displayMode = TRUE, ..., preview = interactive()) {
+  html <- katex_render(tex, displayMode = displayMode, ...)
   if(isTRUE(preview)){
     tmp <- tempfile(fileext = '.html')
     writeLines(htmlify(html), tmp, useBytes = TRUE)
@@ -49,18 +61,15 @@ render_html <- function(tex, preview = FALSE, include_css = FALSE, options = NUL
 #' @rdname katex
 #' @param include_css adds the katex css file to the output.
 #' This is only required once per html webpage.
-render_rd <- function(tex, include_css = TRUE, options = NULL){
-  options <- as.list(options)
-  html <- render_html(tex, include_css = include_css, options = options)
+katex_rd <- function(tex, include_css = TRUE, displayMode = TRUE, ...){
+  html <- katex_html(tex, include_css = include_css, displayMode = displayMode, ...)
   paste('\\if{html}{\\out{', html, '}}', sep = '\n')
 }
 
 #' @export
 #' @rdname katex
-render_mathml <- function(tex, options = NULL) {
-  options <- as.list(options)
-  options$output <- 'mathml'
-  katex_render(tex = tex, options = options)
+katex_mathml <- function(tex, displayMode = TRUE, ...) {
+  katex_render(tex = tex, displayMode = displayMode, output = 'mathml', ...)
 }
 
 #' @export
@@ -75,11 +84,9 @@ example_math <- function(){
   ctx$source(system.file("js/katex.min.js", package = pkg))
 }
 
-# todo: add html class to make this a 'widget' ?
-katex_render <- function(tex, options = NULL) {
-  options <- as.list(options)
-  if(!length(options$displayMode))
-    options$displayMode <- TRUE
+katex_render <- function(tex, displayMode, ...) {
+  options <- list(...)
+  options$displayMode <- displayMode
   html <- ctx$call('katex.renderToString', tex, options)
   Encoding(html) = 'UTF-8'
   html
