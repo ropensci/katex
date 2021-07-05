@@ -1,11 +1,11 @@
-#' Insert math in R documentation
+#' Display math in R documentation
 #'
 #' Helper function to insert tex math expressions into R documentation (rd) files.
 #' Uses Katex rendering for documentation rendered into HTML format, and the appropriate
 #' tex macros for documentation rendered to pdf
 #'
 #' Use `math_to_rd()` inside `\Sexpr` to embed math in your R package documentation
-#' pages. For example the code below:
+#' pages. For example the code below can be inserted in your `rd` (or roxygen) text:
 #'
 #' ```
 #' \Sexpr[results=rd, stage=build]{
@@ -13,14 +13,14 @@
 #' }
 #' ```
 #'
-#' Results in the following output:
+#' Which results in the following output:
 #'
 #' \Sexpr[results=rd, stage=build]{
 #'   katex::math_to_rd(katex::example_math())
 #' }
 #'
-#' Optionally you can specify an ascii representation that will be shown when rendering
-#' the documentation to plain text format:
+#' Optionally you can specify an alternate ascii representation that will be shown in
+#' the plain-text format rendering of the documentation:
 #'
 #' ```
 #' \Sexpr[results=rd, stage=build]{
@@ -32,7 +32,7 @@
 #'   katex::math_to_rd('E=MC^2', 'E=MC²')
 #' }
 #'
-#' If no ascii representation is given, the input latex in inserted verbatim into the
+#' If no ascii representation is given, the input tex in displayed verbatim into the
 #' plain-text documentation.
 #'
 #' @export

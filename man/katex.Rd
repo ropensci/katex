@@ -5,7 +5,7 @@
 \alias{katex_html}
 \alias{katex_mathml}
 \alias{example_math}
-\title{Server-side LaTeX Math Rendering}
+\title{Server-side tex math rendering}
 \usage{
 katex_html(
   tex,
@@ -20,7 +20,7 @@ katex_mathml(tex, displayMode = TRUE, ...)
 example_math()
 }
 \arguments{
-\item{tex}{string with latex math expression}
+\item{tex}{input string with tex math expression.}
 
 \item{displayMode}{render math in a large, 2D, centered style similar to \verb{$$} in tex.
 Set to \code{FALSE} to render inline, which disables centering and tries to squeeze the
@@ -33,7 +33,7 @@ respectively, see \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.
 \item{preview}{open an HTML preview page showing the snipped in the browser}
 }
 \description{
-Converts latex math to html, mathml, or rd for use in manual pages or
+Converts tex-style math expressions to html and mathml for use in manual pages or
 markdown documents.
 The conversion is to HTML done in R using V8, hence the resulting snipped can
 be inserted into an HTML document without the need for a JavaScript library. Only the

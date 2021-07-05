@@ -1,6 +1,6 @@
-#' Server-side LaTeX Math Rendering
+#' Server-side tex math rendering
 #'
-#' Converts latex math to html, mathml, or rd for use in manual pages or
+#' Converts tex-style math expressions to html and mathml for use in manual pages or
 #' markdown documents.
 #' The conversion is to HTML done in R using V8, hence the resulting snipped can
 #' be inserted into an HTML document without the need for a JavaScript library. Only the
@@ -15,7 +15,7 @@
 #' @name katex
 #' @rdname katex
 #' @family katex
-#' @param tex string with latex math expression
+#' @param tex input string with tex math expression.
 #' @param preview open an HTML preview page showing the snipped in the browser
 #' @param displayMode render math in a large, 2D, centered style similar to `$$` in tex.
 #' Set to `FALSE` to render inline, which disables centering and tries to squeeze the

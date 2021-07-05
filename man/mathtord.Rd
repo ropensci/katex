@@ -2,12 +2,12 @@
 % Please edit documentation in R/mathtord.R
 \name{math_to_rd}
 \alias{math_to_rd}
-\title{Insert math in R documentation}
+\title{Display math in R documentation}
 \usage{
 math_to_rd(tex, ascii = tex, include_css = TRUE, displayMode = TRUE, ...)
 }
 \arguments{
-\item{tex}{string with latex math expression}
+\item{tex}{input string with tex math expression.}
 
 \item{ascii}{alternate text representation of the input math to show when documentation is
 rendered to plain text format.}
@@ -30,19 +30,19 @@ tex macros for documentation rendered to pdf
 }
 \details{
 Use \code{math_to_rd()} inside \verb{\\Sexpr} to embed math in your R package documentation
-pages. For example the code below:\preformatted{\\Sexpr[results=rd, stage=build]\{
+pages. For example the code below can be inserted in your \code{rd} (or roxygen) text:\preformatted{\\Sexpr[results=rd, stage=build]\{
   katex::math_to_rd(katex::example_math())
 \}
 }
 
-Results in the following output:
+Which results in the following output:
 
 \Sexpr[results=rd, stage=build]{
 katex::math_to_rd(katex::example_math())
 }
 
-Optionally you can specify an ascii representation that will be shown when rendering
-the documentation to plain text format:\preformatted{\\Sexpr[results=rd, stage=build]\{
+Optionally you can specify an alternate ascii representation that will be shown in
+the plain-text format rendering of the documentation:\preformatted{\\Sexpr[results=rd, stage=build]\{
   katex::math_to_rd('E=MC^2', 'E=mc²')
 \}
 }
@@ -51,7 +51,7 @@ the documentation to plain text format:\preformatted{\\Sexpr[results=rd, stage=b
 katex::math_to_rd('E=MC^2', 'E=MC²')
 }
 
-If no ascii representation is given, the input latex in inserted verbatim into the
+If no ascii representation is given, the input tex in displayed verbatim into the
 plain-text documentation.
 }
 \seealso{
