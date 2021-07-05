@@ -3,5 +3,5 @@
 export(example_math)
 export(katex_html)
 export(katex_mathml)
-export(katex_rd)
+export(math_to_rd)
 importFrom(V8,v8)

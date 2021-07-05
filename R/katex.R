@@ -6,22 +6,7 @@
 #' be inserted into an HTML document without the need for a JavaScript library. Only the
 #' [katex.css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css)
 #' style is required to display the html in the output document.
-#'
-#' You can use `katex_rd()` inside `\Sexpr` to embed html math in a package manual
-#' pages. For the pdf manuals this function simply injects the input math untouched
-#' into the latex page. For example the code below:
-#'
-#' ```
-#' \Sexpr[results=rd, stage=build]{
-#'   katex::katex_rd(katex::example_math())
-#' }
-#' ```
-#'
-#' Results in the following output:
-#'
-#' \Sexpr[results=rd, stage=build]{
-#'   katex::katex_rd(katex::example_math())
-#' }
+#' Use [math_to_rd] for embedding math into R documentation (rd) pages.
 #'
 #' By default, [katex_html] returns a mix of HTML for visual rendering and includes
 #' MathML for accessibility. To only get html, pass `output="html"` in the extra options,
@@ -29,6 +14,7 @@
 #' @export
 #' @name katex
 #' @rdname katex
+#' @family katex
 #' @param tex string with latex math expression
 #' @param preview open an HTML preview page showing the snipped in the browser
 #' @param displayMode render math in a large, 2D, centered style similar to `$$` in tex.
@@ -57,19 +43,6 @@ katex_html <- function(tex, include_css = FALSE, displayMode = TRUE, ..., previe
   if(isTRUE(include_css))
     html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">', html, sep = '\n')
   html
-}
-
-#' @export
-#' @rdname katex
-#' @param include_css adds the katex css file to the output.
-#' This is only required once per html webpage.
-katex_rd <- function(tex, include_css = TRUE, displayMode = TRUE, ..., preview = FALSE){
-  html <- katex_html(tex, include_css = include_css, displayMode = displayMode, ...,
-                     preview = preview)
-  html_out <- paste('\\if{html}{\\out{', html, '}}', sep = '\n')
-  latex_out <- paste('\\if{latex}{', ifelse(displayMode, '\\deqn{', '\\eqn{'), tex, '}}', sep = '\n')
-  text_out <- paste('\\if{text}{\\out{', tex, '}}', sep = '\n')
-  paste(html_out, latex_out, text_out, sep = '\n')
 }
 
 #' @export
