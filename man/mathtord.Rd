@@ -25,8 +25,8 @@ respectively, see \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.
 }
 \description{
 Helper function to insert tex math expressions into R documentation (rd) files.
-Uses Katex rendering for documentation rendered into HTML format, and the appropriate
-tex macros for documentation rendered to pdf
+Uses Katex rendering for documentation in html format, and the appropriate latex
+macros for documentation rendered in pdf.
 }
 \details{
 Use \code{math_to_rd()} inside \verb{\\Sexpr} to embed math in your R package documentation

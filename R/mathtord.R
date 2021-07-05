@@ -1,8 +1,8 @@
 #' Display math in R documentation
 #'
 #' Helper function to insert tex math expressions into R documentation (rd) files.
-#' Uses Katex rendering for documentation rendered into HTML format, and the appropriate
-#' tex macros for documentation rendered to pdf
+#' Uses Katex rendering for documentation in html format, and the appropriate latex
+#' macros for documentation rendered in pdf.
 #'
 #' Use `math_to_rd()` inside `\Sexpr` to embed math in your R package documentation
 #' pages. For example the code below can be inserted in your `rd` (or roxygen) text:
