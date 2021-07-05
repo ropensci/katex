@@ -4,33 +4,35 @@
 \alias{math_to_rd}
 \title{Display math in R documentation}
 \usage{
-math_to_rd(tex, ascii = tex, include_css = TRUE, displayMode = TRUE, ...)
+math_to_rd(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE)
 }
 \arguments{
 \item{tex}{input string with tex math expression.}
 
-\item{ascii}{alternate text representation of the input math to show when documentation is
-rendered to plain text format.}
+\item{ascii}{alternate text-only representation of the input math to show in
+documentation rendered to plain text format.}
+
+\item{displayMode}{render math in centered 2D layout, similar to \verb{$$} in tex.
+Set to \code{FALSE} to render (non-centered) inline layout for use in text.
+For pdf output, this corresponds to the \verb{\deqn{}} and \verb{\eqn{}} macros, see
+\href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics}{WRE 2.6: Mathematics}}
+
+\item{...}{additional html rendering options passed to
+\href{https://katex.org/docs/options.html}{katex.render}}
 
 \item{include_css}{adds the katex css file to the output.
-This is only required once per html webpage.}
-
-\item{displayMode}{render math in a large, 2D, centered style similar to \verb{$$} in tex.
-Set to \code{FALSE} to render inline, which disables centering and tries to squeeze the
-equation on a single line. For pdf output, this corresponds to \verb{\deqn{}} and \verb{\eqn{}}
-respectively, see \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics}{WRE 2.6: Mathematics}}
-
-\item{...}{additional rendering options passed to
-\href{https://katex.org/docs/options.html}{katex.render}}
+This is only required once per html webpage. Set to \code{FALSE} if you include css
+files into the your html head some other way.}
 }
 \description{
-Helper function to insert tex math expressions into R documentation (rd) files.
+Helper function to insert tex math expressions into R documentation (\code{.rd}) files.
 Uses Katex rendering for documentation in html format, and the appropriate latex
-macros for documentation rendered in pdf.
+macros for documentation rendered in pdf or plain-text.
 }
 \details{
 Use \code{math_to_rd()} inside \verb{\\Sexpr} to embed math in your R package documentation
-pages. For example the code below can be inserted in your \code{rd} (or roxygen) text:\preformatted{\\Sexpr[results=rd, stage=build]\{
+pages. For example the code below can be inserted in your \code{rd} (or roxygen)
+source code:\preformatted{\\Sexpr[results=rd, stage=build]\{
   katex::math_to_rd(katex::example_math())
 \}
 }

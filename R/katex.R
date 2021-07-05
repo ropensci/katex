@@ -1,12 +1,12 @@
-#' Server-side tex math rendering
+#' Tex math rendering in R
 #'
 #' Converts tex-style math expressions to html and mathml for use in manual pages or
 #' markdown documents.
-#' The conversion is to HTML done in R using V8, hence the resulting snipped can
-#' be inserted into an HTML document without the need for a JavaScript library. Only the
-#' [katex.css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css)
-#' style is required to display the html in the output document.
-#' Use [math_to_rd] for embedding math into R documentation (rd) pages.
+#' The conversion is done in R using V8, hence the resulting fragment can
+#' be inserted into an HTML document without the need for a JavaScript library like MathJax.
+#' Only the [katex.css](https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css)
+#' style file is required in the final html document.
+#' Use [math_to_rd] for embedding math into R documentation (`.rd`) pages.
 #'
 #' By default, [katex_html] returns a mix of HTML for visual rendering and includes
 #' MathML for accessibility. To only get html, pass `output="html"` in the extra options,
@@ -17,12 +17,15 @@
 #' @family katex
 #' @param tex input string with tex math expression.
 #' @param preview open an HTML preview page showing the snipped in the browser
-#' @param displayMode render math in a large, 2D, centered style similar to `$$` in tex.
-#' Set to `FALSE` to render inline, which disables centering and tries to squeeze the
-#' equation on a single line. For pdf output, this corresponds to `\deqn{}` and `\eqn{}`
-#' respectively, see [WRE 2.6: Mathematics](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics)
-#' @param ... additional rendering options passed to
+#' @param displayMode render math in centered 2D layout, similar to `$$` in tex.
+#' Set to `FALSE` to render (non-centered) inline layout for use in text.
+#' For pdf output, this corresponds to the `\deqn{}` and `\eqn{}` macros, see
+#' [WRE 2.6: Mathematics](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics)
+#' @param ... additional html rendering options passed to
 #' [katex.render](https://katex.org/docs/options.html)
+#' @param include_css adds the katex css file to the output.
+#' This is only required once per html webpage. Set to `FALSE` if you include css
+#' files into the your html head some other way.
 #' @examples # Basic examples
 #' html <- katex_html(example_math())
 #' mathml <- katex_mathml(example_math())
@@ -32,7 +35,7 @@
 #' math <- "\\f\\relax{x} = \\int_{-\\infty}^\\infty \\f\\hat\\xi\\,e^{2 \\pi i \\xi x} \\,d\\xi"
 #' html <- katex_html(math,  macros = macros)
 #' mathml <- katex_mathml(math,  macros = macros)
-katex_html <- function(tex, include_css = FALSE, displayMode = TRUE, ..., preview = interactive()) {
+katex_html <- function(tex, displayMode = TRUE, ..., include_css = FALSE, preview = interactive()) {
   html <- katex_render(tex, displayMode = displayMode, ...)
   if(isTRUE(preview)){
     tmp <- tempfile(fileext = '.html')

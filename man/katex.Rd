@@ -5,13 +5,13 @@
 \alias{katex_html}
 \alias{katex_mathml}
 \alias{example_math}
-\title{Server-side tex math rendering}
+\title{Tex math rendering in R}
 \usage{
 katex_html(
   tex,
-  include_css = FALSE,
   displayMode = TRUE,
   ...,
+  include_css = FALSE,
   preview = interactive()
 )
 
@@ -22,24 +22,28 @@ example_math()
 \arguments{
 \item{tex}{input string with tex math expression.}
 
-\item{displayMode}{render math in a large, 2D, centered style similar to \verb{$$} in tex.
-Set to \code{FALSE} to render inline, which disables centering and tries to squeeze the
-equation on a single line. For pdf output, this corresponds to \verb{\deqn{}} and \verb{\eqn{}}
-respectively, see \href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics}{WRE 2.6: Mathematics}}
+\item{displayMode}{render math in centered 2D layout, similar to \verb{$$} in tex.
+Set to \code{FALSE} to render (non-centered) inline layout for use in text.
+For pdf output, this corresponds to the \verb{\deqn{}} and \verb{\eqn{}} macros, see
+\href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Mathematics}{WRE 2.6: Mathematics}}
 
-\item{...}{additional rendering options passed to
+\item{...}{additional html rendering options passed to
 \href{https://katex.org/docs/options.html}{katex.render}}
+
+\item{include_css}{adds the katex css file to the output.
+This is only required once per html webpage. Set to \code{FALSE} if you include css
+files into the your html head some other way.}
 
 \item{preview}{open an HTML preview page showing the snipped in the browser}
 }
 \description{
 Converts tex-style math expressions to html and mathml for use in manual pages or
 markdown documents.
-The conversion is to HTML done in R using V8, hence the resulting snipped can
-be inserted into an HTML document without the need for a JavaScript library. Only the
-\href{https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css}{katex.css}
-style is required to display the html in the output document.
-Use \link{math_to_rd} for embedding math into R documentation (rd) pages.
+The conversion is done in R using V8, hence the resulting fragment can
+be inserted into an HTML document without the need for a JavaScript library like MathJax.
+Only the \href{https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css}{katex.css}
+style file is required in the final html document.
+Use \link{math_to_rd} for embedding math into R documentation (\code{.rd}) pages.
 }
 \details{
 By default, \link{katex_html} returns a mix of HTML for visual rendering and includes
