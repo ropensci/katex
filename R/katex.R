@@ -68,7 +68,8 @@ katex_rd <- function(tex, include_css = TRUE, displayMode = TRUE, ..., preview =
                      preview = preview)
   html_out <- paste('\\if{html}{\\out{', html, '}}', sep = '\n')
   latex_out <- paste('\\if{latex}{', ifelse(displayMode, '\\deqn{', '\\eqn{'), tex, '}}', sep = '\n')
-  paste(html_out, latex_out, sep = '\n')
+  text_out <- paste('\\if{text}{\\out{', tex, '}}', sep = '\n')
+  paste(html_out, latex_out, text_out, sep = '\n')
 }
 
 #' @export
