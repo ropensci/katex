@@ -26,6 +26,7 @@
 #' @param include_css adds the katex css file to the output.
 #' This is only required once per html webpage. Set to `FALSE` if you include css
 #' files into the your html head some other way.
+#' @returns a string with a html/mathml fragment
 #' @examples # Basic examples
 #' html <- katex_html(example_math())
 #' mathml <- katex_mathml(example_math())

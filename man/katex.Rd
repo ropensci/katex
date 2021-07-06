@@ -36,6 +36,9 @@ files into the your html head some other way.}
 
 \item{preview}{open an HTML preview page showing the snipped in the browser}
 }
+\value{
+a string with a html/mathml fragment
+}
 \description{
 Converts tex-style math expressions to html and mathml for use in manual pages or
 markdown documents.

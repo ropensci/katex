@@ -41,6 +41,7 @@
 #' @rdname math_to_rd
 #' @family katex
 #' @inheritParams katex
+#' @returns a string with an rd fragment to be included in R documentation
 #' @param ascii alternate text-only representation of the input math to show in
 #' documentation rendered to plain text format.
 math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE){

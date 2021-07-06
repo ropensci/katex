@@ -24,6 +24,9 @@ For pdf output, this corresponds to the \verb{\deqn{}} and \verb{\eqn{}} macros,
 This is only required once per html webpage. Set to \code{FALSE} if you include css
 files into the your html head some other way.}
 }
+\value{
+a string with an rd fragment to be included in R documentation
+}
 \description{
 Helper function to insert tex math expressions into R documentation (\code{.rd}) files.
 Uses Katex rendering for documentation in html format, and the appropriate latex
