@@ -45,7 +45,7 @@ katex_html <- function(tex, displayMode = TRUE, ..., include_css = FALSE, previe
     viewer(tmp)
   }
   if(isTRUE(include_css))
-    html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">', html, sep = '\n')
+    html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" data-external="1">', html, sep = '\n')
   structure(html, class = c('html', 'character'))
 }
 
@@ -83,7 +83,7 @@ template <- '<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" data-external="1">
   </head>
   <body>
   {{math}}
