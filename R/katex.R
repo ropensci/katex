@@ -46,7 +46,7 @@ katex_html <- function(tex, displayMode = TRUE, ..., include_css = FALSE, previe
   }
   if(isTRUE(include_css))
     html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">', html, sep = '\n')
-  html
+  structure(html, class = c('html', 'character'))
 }
 
 #' @export
