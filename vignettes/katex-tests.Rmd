@@ -3,11 +3,8 @@ title: "Testing katex"
 output: 
   html_document:
     mathjax: null
-    template: null
     theme: null
     self_contained: false
-    highlight: pygments
-    css: ""
 vignette: >
   %\VignetteIndexEntry{Testing katex}
   %\VignetteEngine{knitr::rmarkdown}
