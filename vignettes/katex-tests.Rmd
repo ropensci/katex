@@ -1,12 +1,13 @@
 ---
-title: "Testing katex"
+title: "Rending math to HTML in R using katex"
 output: 
   html_document:
     mathjax: null
     theme: null
-    self_contained: false
+    highlight: haddock
+#    self_contained: false
 vignette: >
-  %\VignetteIndexEntry{Testing katex}
+  %\VignetteIndexEntry{Rending math to HTML in R using katex}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE, comment = "")
 library(katex)
 ```
 
+This vignette demonstrates some example math rendered server-side in R using the katex package. Refer to the upstream [katex support table](https://katex.org/docs/support_table.html) for the full list of supported tex functions.
 
-
-Equations from: https://www.intmath.com/cg5/katex-mathjax-comparison.php
+Example equations from: https://www.intmath.com/cg5/katex-mathjax-comparison.php
 
 ### Equation 1
 

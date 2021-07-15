@@ -49,6 +49,9 @@ style file is required in the final html document.
 Use \link{math_to_rd} for embedding math into R documentation (\code{.rd}) pages.
 }
 \details{
+Refer to the upstream \href{https://katex.org/docs/support_table.html}{katex support table} for
+the full list of supported tex functions that can be rendered to html using katex.
+
 By default, \link{katex_html} returns a mix of HTML for visual rendering and includes
 MathML for accessibility. To only get html, pass \code{output="html"} in the extra options,
 see also the \href{https://katex.org/docs/options.html}{katex documentation}.

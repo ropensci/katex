@@ -8,6 +8,9 @@
 #' style file is required in the final html document.
 #' Use [math_to_rd] for embedding math into R documentation (`.rd`) pages.
 #'
+#' Refer to the upstream [katex support table](https://katex.org/docs/support_table.html) for
+#' the full list of supported tex functions that can be rendered to html using katex.
+#'
 #' By default, [katex_html] returns a mix of HTML for visual rendering and includes
 #' MathML for accessibility. To only get html, pass `output="html"` in the extra options,
 #' see also the [katex documentation](https://katex.org/docs/options.html).
