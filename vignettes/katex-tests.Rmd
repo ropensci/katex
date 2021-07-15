@@ -76,7 +76,7 @@ katex_html(tex7)
 
 ### Equation 8
 
-```{r}
+```{r, eval = V8::engine_info()$version > 6}
 tex8 <- "\\begin{pmatrix} 
 a_{11} & a_{12} & a_{13}\\\\ 
 a_{21} & a_{22} & a_{23}\\\\ 
