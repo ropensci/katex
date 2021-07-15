@@ -1,0 +1,9 @@
+1.1.0
+  - Add 'html' class to output from katex_html() such that it gets
+    automatically displayed in Rmarkdown.
+  - Add workaround for Windows encoding bug in math_to_rd().
+    The bug should be fixed in R for Windows 4.1.1.
+  - Add a vignette with some examples
+
+1.0.0:
+  - CRAN release

@@ -59,6 +59,15 @@ katex::math_to_rd('E=MC^2', 'E=MC²')
 If no ascii representation is given, the input tex in displayed verbatim into the
 plain-text documentation.
 }
+\section{Note for Windows}{
+R versions before 4.1.1 had a \href{https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152}{bug on Windows}
+which could lead to incorrect HTML characters for \verb{\\Sexpr\{\}} output.
+This bug only appears when the source package gets built; the
+regardlessof the R version/platform where the package is eventually installed.
+Hence package developers on Windows should use at least R 4.1.1, or
+alternatively build the source package on Linux/MacOS.
+}
+
 \seealso{
 Other katex: 
 \code{\link{katex}}
