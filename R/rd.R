@@ -40,11 +40,11 @@
 #'
 #' R versions before 4.1.1 had a [bug on Windows](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152)
 #' which could lead to incorrect HTML characters for `\Sexpr{}` output.
-#' This bug only appears when the source package gets built; the
-#' regardlessof the R version/platform where the package is eventually installed.
-#' Hence package developers on Windows should use at least R 4.1.1, or
-#' alternatively build the source package on Linux/MacOS.
-#'
+#' This bug hits when the source package gets built on Windows (i.e. when
+#' html manual pages are generated for `\Sexpr{}` with `stage=build`).
+#' Therefore, package developers on Windows should preferably use R 4.1.1
+#' or later to build and release source packages containing `\Sexpr{}` code.
+#' Linux and MacOS are unaffected.
 #'
 #' @export
 #' @name math_to_rd
