@@ -60,7 +60,7 @@ If no ascii representation is given, the input tex in displayed verbatim into th
 plain-text documentation.
 }
 \section{Note for Windows}{
-On Windows, R versions before 4.1.2 had a \href{https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152}{bug}
+On Windows, R versions before 4.1.2 had a \href{https://bugs.r-project.org/show_bug.cgi?id=18152}{bug}
 which could lead to incorrect HTML encoding for \verb{\\Sexpr\{\}} output.
 As a workaround, we automatically escape non-ascii html characters
 on these versions of R. Linux and MacOS are unaffected.

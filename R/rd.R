@@ -38,7 +38,7 @@
 #'
 #' # Note for Windows
 #'
-#' On Windows, R versions before 4.1.2 had a [bug](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152)
+#' On Windows, R versions before 4.1.2 had a [bug](https://bugs.r-project.org/show_bug.cgi?id=18152)
 #' which could lead to incorrect HTML encoding for `\Sexpr{}` output.
 #' As a workaround, we automatically escape non-ascii html characters
 #' on these versions of R. Linux and MacOS are unaffected.
@@ -59,7 +59,7 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
                      tex, '}{', ascii, '}}', sep = '\n')
   rd <- paste(html_out, latex_out, sep = '\n')
   if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.2'){
-    # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152
+    # https://bugs.r-project.org/show_bug.cgi?id=18152
     rd <- ctx$call('escape_utf8', rd)
   }
   structure(rd, class = 'Rdtext')
