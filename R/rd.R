@@ -63,7 +63,11 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
   rd <- paste(html_out, latex_out, sep = '\n')
   if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.1'){
     # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152
-    rd <- enc2native(rd)
+    rd <- gsub(
+      pattern = "<(U\\+[0-9A-Fa-f]{4,8})>",
+      replacement = "&lt;\\1&gt;",
+      x = enc2native(rd)
+    )
   }
   structure(rd, class = 'Rdtext')
 }
