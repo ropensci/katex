@@ -38,7 +38,7 @@
 #'
 #' # Note for Windows
 #'
-#' R versions before 4.1.1 had a [bug on Windows](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152)
+#' R versions before 4.1.2 had a [bug on Windows](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152)
 #' which could lead to incorrect HTML characters for `\Sexpr{}` output.
 #' This bug hits when the source package gets built on Windows (i.e. when
 #' html manual pages are generated for `\Sexpr{}` with `stage=build`).
