@@ -1,3 +1,8 @@
+1.2.0
+  - Better workaround for Windows encoding bug in R < 4.1.2: html
+    output automatically gets escaped now on these versions of R.
+    See https://bugs.r-project.org/show_bug.cgi?id=18152
+
 1.1.0
   - Add 'html' class to output from katex_html() such that it gets
     automatically displayed in Rmarkdown.
