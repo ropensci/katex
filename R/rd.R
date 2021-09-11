@@ -61,7 +61,7 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
   latex_out <- paste('\\if{latex,text}{', ifelse(displayMode, '\\deqn{', '\\eqn{'),
                      tex, '}{', ascii, '}}', sep = '\n')
   rd <- paste(html_out, latex_out, sep = '\n')
-  if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.1'){
+  if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.2'){
     # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152
     rd <- gsub(
       pattern = "<(U\\+[0-9A-Fa-f]{4,8})>",
