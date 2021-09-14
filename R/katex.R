@@ -68,6 +68,8 @@ example_math <- function(){
 .onLoad <- function(lib, pkg){
   assign("ctx", V8::v8("window"), environment(.onLoad))
   ctx$source(system.file("js/katex.min.js", package = pkg))
+  ctx$source(system.file("js/cheerio-0.22.min.js", package = pkg))
+  ctx$source(system.file("js/bindings.js", package = pkg))
   if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.2'){
     ctx$source(system.file("js/he.min.js", package = pkg))
     ctx$eval('function escape_utf8(rd){return he.encode(rd, {allowUnsafeSymbols: true})}')

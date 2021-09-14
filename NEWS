@@ -1,3 +1,6 @@
+2.0.0
+  - Add function render_math_in_html()
+
 1.2.0
   - Better workaround for Windows encoding bug in R < 4.1.2: html
     output automatically gets escaped now on these versions of R.
