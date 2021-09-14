@@ -5,6 +5,7 @@
 #' post-processing step for pandoc, which generates such html for equations.
 #' As a result the math can show without the need for for including mathjax.
 #'
+#' @rdname pandoc
 #' @param input path to the html input file
 #' @param output path to the output html file, or NULL to return as string
 #' @param include_css automatically inject the required katex css in the html head
