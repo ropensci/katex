@@ -1,5 +1,6 @@
-function html_render_math(html, include_css = true, options = {}){
+function html_render_math(html, include_css, options){
   var $ = cheerio.load(html);
+  options = options || {};
   $('.math.inline').each(function(i, el){
     var el = $(el)
     var text = el.text().trim();
