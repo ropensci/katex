@@ -68,6 +68,7 @@ on these versions of R. Linux and MacOS are unaffected.
 
 \seealso{
 Other katex: 
-\code{\link{katex}}
+\code{\link{katex}},
+\code{\link{pandoc}}
 }
 \concept{katex}

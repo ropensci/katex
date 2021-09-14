@@ -69,6 +69,7 @@ mathml <- katex_mathml(math,  macros = macros)
 }
 \seealso{
 Other katex: 
-\code{\link{math_to_rd}()}
+\code{\link{math_to_rd}()},
+\code{\link{pandoc}}
 }
 \concept{katex}
