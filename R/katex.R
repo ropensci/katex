@@ -67,7 +67,7 @@ example_math <- function(){
 #' @importFrom V8 v8
 .onLoad <- function(lib, pkg){
   assign("ctx", V8::v8("window"), environment(.onLoad))
-  ctx$source(system.file("js/katex.min.js", package = pkg))
+  ctx$source(system.file("js/katex-0.15.2.min.js", package = pkg))
   ctx$source(system.file("js/cheerio-0.22.min.js", package = pkg))
   ctx$source(system.file("js/bindings.js", package = pkg))
   if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.2'){
