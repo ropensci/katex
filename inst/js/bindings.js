@@ -24,7 +24,13 @@ function html_render_math(html, include_css, options){
     el.replaceWith(out);
   });
   if(include_css){
-    $('head').append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" data-external="1">');
+    var head = $('head');
+    if(head.length){
+      head.append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" data-external="1">');
+    } else {
+      /* html snippet without a proper <head>, just append css at the top */
+      $.root().prepend('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" data-external="1">\n');
+    }
   }
   return $.html();
 }
