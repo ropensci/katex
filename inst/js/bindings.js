@@ -1,5 +1,4 @@
 function html_render_math(html, include_css, options){
-  var found_math = false;
   var $ = cheerio.load(html);
   options = options || {};
   $('.math.inline').each(function(i, el){
@@ -12,7 +11,6 @@ function html_render_math(html, include_css, options){
     options.displayMode = false;
     var out = katex.renderToString(text, options);
     el.replaceWith(out);
-    found_math = true;
   });
   $('.math.display').each(function(i, el){
     var el = $(el)
@@ -24,9 +22,8 @@ function html_render_math(html, include_css, options){
     options.displayMode = true;
     var out = katex.renderToString(text, options);
     el.replaceWith(out);
-    found_math = true;
   });
-  if(include_css && found_math){
+  if(include_css){
     var head = $('head');
     if(head.length){
       head.append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" data-external="1">');
