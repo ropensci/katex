@@ -16,7 +16,7 @@ URL: https://docs.ropensci.org/katex/,
     https://katex.org/docs/options.html (upstream)
 BugReports: https://github.com/ropensci/katex/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: V8
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
