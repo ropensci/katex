@@ -1,6 +1,6 @@
 #' Display math in R documentation
 #'
-#' Helper function to insert tex math expressions into R documentation (`.rd`) files.
+#' Helper function to insert TeX math expressions into R documentation (`.rd`) files.
 #' Uses Katex rendering for documentation in html format, and the appropriate latex
 #' macros for documentation rendered in pdf or plain-text.
 #'
@@ -35,6 +35,32 @@
 #'
 #' If no ascii representation is given, the input tex in displayed verbatim into the
 #' plain-text documentation.
+#'
+#' # Note about backslash (`\`) escaping
+#'
+#' Expressions in TeX (math) usually start with a backslash like `\frac{}`.
+#' In a normal R code string, you would need to escape that backslash *once*
+#' with another backslash, i.e. write `"\\frac{}"` (because the backslash is
+#' used as escape character). In R documentation, you additionally need to
+#' double the escaping backslashes since a backslash there is first and
+#' foremost interpreted as a special character that identifies sectioning and
+#' mark-up macros.
+#' 
+#' This means to directly insert the TeX math formula
+#' `\int u \frac{dv}{dx}\,dx=uv-\int \frac{du}{dx}v\,dx` in R documentation,
+#' you need to write:
+#'
+#' ```
+#' \Sexpr[results=rd, stage=build]{
+#'   katex::math_to_rd("\\\\int u \\\\frac{dv}{dx}\\\\,dx=uv-\\\\int \\\\frac{du}{dx}v\\\\,dx")
+#' }
+#' ```
+#'
+#' which then results in
+#'
+#' \Sexpr[results=rd, stage=build]{
+#'   katex::math_to_rd("\\\\int u \\\\frac{dv}{dx}\\\\,dx=uv-\\\\int \\\\frac{du}{dx}v\\\\,dx")
+#' }
 #'
 #' # Note for Windows
 #'
