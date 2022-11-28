@@ -54,6 +54,7 @@
 math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE){
   html <- katex_html(tex, include_css = include_css, displayMode = displayMode, ...,
                      preview = FALSE)
+  html <- workaround_htmltidy_bug(html)
   html_out <- paste('\\if{html}{\\out{', html, '}}', sep = '\n')
   latex_out <- paste('\\if{latex,text}{', ifelse(displayMode, '\\deqn{', '\\eqn{'),
                      tex, '}{', ascii, '}}', sep = '\n')
@@ -63,4 +64,11 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
     rd <- ctx$call('escape_utf8', rd)
   }
   structure(rd, class = 'Rdtext')
+}
+
+# https://github.com/htacg/tidy-html5/issues/1046
+workaround_htmltidy_bug <- function(x){
+  sub('<svg xmlns="http://www.w3.org/2000/svg" width=\'([0-9.]+)em\' height=\'([0-9.]+)em\'',
+      '<svg xmlns="http://www.w3.org/2000/svg" width="\\1" height="\\2"',
+      x, perl = TRUE)
 }
