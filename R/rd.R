@@ -69,6 +69,6 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
 # https://github.com/htacg/tidy-html5/issues/1046
 workaround_htmltidy_bug <- function(x){
   sub('<svg xmlns="http://www.w3.org/2000/svg" width=\'([0-9.]+)em\' height=\'([0-9.]+)em\'',
-      '<svg xmlns="http://www.w3.org/2000/svg" width="\\1" height="\\2"',
+      '<svg xmlns="http://www.w3.org/2000/svg"',
       x, perl = TRUE)
 }
