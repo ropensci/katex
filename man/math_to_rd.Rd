@@ -35,10 +35,12 @@ macros for documentation rendered in pdf or plain-text.
 \details{
 Use \code{math_to_rd()} inside \verb{\\Sexpr} to embed math in your R package documentation
 pages. For example the code below can be inserted in your \code{rd} (or roxygen)
-source code:\preformatted{\\Sexpr[results=rd, stage=build]\{
+source code:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\Sexpr[results=rd, stage=build]\{
   katex::math_to_rd(katex::example_math())
 \}
-}
+}\if{html}{\out{</div>}}
 
 Which results in the following output:
 
@@ -47,10 +49,12 @@ katex::math_to_rd(katex::example_math())
 }
 
 Optionally you can specify an alternate ascii representation that will be shown in
-the plain-text format rendering of the documentation:\preformatted{\\Sexpr[results=rd, stage=build]\{
+the plain-text format rendering of the documentation:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{\\Sexpr[results=rd, stage=build]\{
   katex::math_to_rd('E=MC^2', 'E=mc²')
 \}
-}
+}\if{html}{\out{</div>}}
 
 \Sexpr[results=rd, stage=build]{
 katex::math_to_rd('E=MC^2', 'E=MC²')
