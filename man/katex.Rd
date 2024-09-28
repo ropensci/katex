@@ -44,7 +44,7 @@ Converts tex-style math expressions to html and mathml for use in manual pages o
 markdown documents.
 The conversion is done in R using V8 ("server-side"), hence the resulting fragment can
 be inserted into an HTML document without the need for a JavaScript library like MathJax.
-Only the \href{https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css}{katex.css}
+Only the \href{https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css}{katex.css}
 style file is required in the final html document.
 Use \link{math_to_rd} for embedding math into R documentation (\code{.rd}) pages.
 }

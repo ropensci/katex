@@ -1,7 +1,7 @@
 Package: katex
 Type: Package
 Title: Rendering Math to HTML, 'MathML', or R-Documentation Format
-Version: 1.4.1
+Version: 1.5.0
 Authors@R: c(person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroenooms@gmail.com",
     comment = c(ORCID = "0000-0002-4035-0289")),
     person("Khan Academy and other contributors", role = "cph", comment="KaTeX JavaScript library"))
@@ -17,7 +17,7 @@ URL: https://docs.ropensci.org/katex/,
     https://katex.org/docs/options.html (upstream)
 BugReports: https://github.com/ropensci/katex/issues
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2.9000
 Imports: V8
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

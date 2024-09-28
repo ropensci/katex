@@ -1,3 +1,6 @@
+1.5.0
+  - Update to katex.js 0.16.9
+
 1.4.1
   - Update to katex.js 0.16.3
   - Workaround htmltidy bug not allowing 'em' sizes in Rd files

@@ -4,7 +4,7 @@
 #' markdown documents.
 #' The conversion is done in R using V8 ("server-side"), hence the resulting fragment can
 #' be inserted into an HTML document without the need for a JavaScript library like MathJax.
-#' Only the [katex.css](https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css)
+#' Only the [katex.css](https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css)
 #' style file is required in the final html document.
 #' Use [math_to_rd] for embedding math into R documentation (`.rd`) pages.
 #'
@@ -48,7 +48,7 @@ katex_html <- function(tex, displayMode = TRUE, ..., include_css = FALSE, previe
     viewer(tmp)
   }
   if(isTRUE(include_css))
-    html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" data-external="1">', html, sep = '\n')
+    html <- paste('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">', html, sep = '\n')
   structure(html, class = c('html', 'character'))
 }
 
@@ -67,11 +67,11 @@ example_math <- function(){
 #' @importFrom V8 v8
 .onLoad <- function(lib, pkg){
   assign("ctx", V8::v8("window"), environment(.onLoad))
-  ctx$source(system.file("js/katex-0.16.3.min.js", package = pkg))
-  ctx$source(system.file("js/cheerio-0.22.min.js", package = pkg))
-  ctx$source(system.file("js/bindings.js", package = pkg))
+  ctx$source(system.file("js/katex-0.16.9.min.js", package = pkg, mustWork = TRUE))
+  ctx$source(system.file("js/cheerio-0.22.min.js", package = pkg, mustWork = TRUE))
+  ctx$source(system.file("js/bindings.js", package = pkg, mustWork = TRUE))
   if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.2'){
-    ctx$source(system.file("js/he.min.js", package = pkg))
+    ctx$source(system.file("js/he.min.js", package = pkg, mustWork = TRUE))
     ctx$eval('function escape_utf8(rd){return he.encode(rd, {allowUnsafeSymbols: true})}')
   }
 }
@@ -92,7 +92,7 @@ template <- '<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" data-external="1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">
   </head>
   <body>
   {{math}}

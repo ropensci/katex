@@ -26,10 +26,10 @@ function html_render_math(html, include_css, options){
   if(include_css){
     var head = $('head');
     if(head.length){
-      head.append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" data-external="1">');
+      head.append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">');
     } else {
       /* html snippet without a proper <head>, just append css at the top */
-      $.root().prepend('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" data-external="1">\n');
+      $.root().prepend('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1">\n');
     }
   }
   return $.html();
